@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\UWI docs\Year 4\20192020 SEM 2\WEB DEV 2\Demos\info3180-lab7-starter\venv"
+VIRTUAL_ENV="C:\Users\Daniel Battick\Downloads\Current UWI Courses\INFO3180\info3180-project2\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

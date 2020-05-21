@@ -22,8 +22,6 @@ Vue.component('app-header', {
       </div>
     </nav>
     `,
-
-
 });
 
 Vue.component('app-footer', {
@@ -58,7 +56,34 @@ Vue.component('error', {
 const Explore = Vue.component('explore', {
 
     template: `
-    <h2 class="alert alert-success">Below we have the explore tab!</h2>
+    <div class="container row justify-content-md-center mt-5 w-100">
+    
+            <div class="post ">
+                <div class="card col-8" style="width:750px">
+                    <div class="heading card-header">
+                        <p class="user card-link" href="#">
+                            <img class="card-img-top " src="static/uploads/man_1.jpg"> 
+                            Quan 
+                        </p>
+                    </div>
+                    <div class="content card-body">
+                        <img src="/static/images/1Beach.jpg" class="pr-4 h-85 w-100"/>
+                        <br><br>
+                        <p> Beautiful </p>
+                    </div>
+                    <div class="foot card-footer row mt-5">
+                        <p class="likes col" style="width:45%""> <i class="far fa-heart"></i>  Likes: 2 </p>
+                        <p class="date col"> January 13, 2020 </p>
+                    </div>
+             
+                </div>
+            </div>
+        
+            <div class="view-button col">
+                <router-link :to="{ path: '/api/users/{user_id}/posts'}" class="btn btn-primary btn-lg" style="width:45%"> New Post </router-link>
+            </div> 
+    </div>
+    
     `,
 
     methods: {
@@ -90,6 +115,56 @@ const Explore = Vue.component('explore', {
 
 });
 
+
+const Upload = Vue.component('upload-form', {
+    template: `
+   
+    <div class="container mt-5 bg-light w-50">
+        <h2 class="py-4">Upload Form</h2>
+            <form @submit.prevent="uploadPhoto"  id="uploadForm" method="post" enctype="multipart/form-data"  >
+                <div class="form-group ">
+                    <label for="photo" > Photo:       </label>
+                    <input type="file"  name="photo" class=" mb-3" placeholder="photo..." >
+                </div>
+                <div class="form-group">
+                    <label for="description"  > Caption: </label>
+                    <textarea rows="5" cols="40"  name="description" class="w-100 form-control mb-3" placeholder="caption..."></textarea>
+                </div>
+                <div class="form-group"
+                <router-link :to="{ path: '/api/posts'}" class="btn btn-success btn-lg" style="width:100%"> Submit  </router-link>
+                </div>
+            </form>
+    </div>
+    `,
+    methods: {
+
+        uploadPhoto: function() {
+        let self = this;
+        let uploadForm = document.getElementById('uploadForm');
+        let form_data = new FormData(uploadForm);
+
+            fetch('/api/users/{user_id}/posts', {
+                    method: 'POST',
+                    body: form_data,
+                    headers: {   
+                        'X-CSRFToken': token    
+                    },     
+                    credentials: 'same-origin' 
+            })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (jsonResponse) {
+                    // display a success message
+                        console.log(jsonResponse);
+                    })
+            .catch(function (error) {
+            console.log(error);
+            });
+
+        }
+    }
+});
 
 
 const Logout = Vue.component('logout', {
@@ -203,6 +278,8 @@ const Login = Vue.component('login', {
 });
 
 
+
+
 const Registration = Vue.component('Registration', {
     template: `
 
@@ -295,6 +372,8 @@ const router = new VueRouter({
         {path: "/", component: Home},
         // Put other routes here
         { path: '/api/posts', component: Explore },
+        // { path: '/api/users/{user_id}/posts', component: Upload},
+        // { path: '/api/users/{user_id}', component: Profile},
         // Path to the login page
         { path: '/api/auth/login', component: Login },
         { path: '/api/users/register', component: Registration },

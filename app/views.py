@@ -131,6 +131,27 @@ def login():
     return jsonify({"message": "Try again"})
 
 
+# @app.route("/api/current_user")
+# @requires_auth
+# @login_required
+# def get_id():
+#     photos=[]
+#     id=current_user.id
+#     username=current_user.username
+#     location=current_user.location 
+#     biography=current_user.biography 
+
+#     post= posts.query.filter_by(user_id=id)
+    
+#     print(post) 
+#     for i in post:
+#         pic={"pic":i.photo}
+#         photos.append(pic)
+#     print(photos)
+#     return jsonify({"id":id,"username":username,"location":location,
+#                     "biography":biography,"firstname":current_user.firstname,"lastname":current_user.lastname,
+#                     "profile_picture":current_user.profile_picture,"join_on":current_user.joined_on,"photos":photos})
+
 @app.route("/api/auth/logout")
 @login_required
 def logout():

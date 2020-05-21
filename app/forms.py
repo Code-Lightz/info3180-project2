@@ -19,5 +19,5 @@ class GramForm(FlaskForm):
     lastname = StringField('Last Name', validators=[InputRequired()])
     email = StringField('Email', validators=[InputRequired(), Email()])
     location = StringField('Location', validators=[InputRequired()])
-    biography = TextAreaField()
+    biography = TextAreaField('Biography', validators=[InputRequired()])
     photo = FileField('Profile Photo', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'Images only!'])])

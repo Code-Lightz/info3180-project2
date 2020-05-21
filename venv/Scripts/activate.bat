@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\UWI docs\Year 4\20192020 SEM 2\WEB DEV 2\Demos\info3180-lab7-starter\venv
+set VIRTUAL_ENV=C:\Users\Daniel Battick\Downloads\Current UWI Courses\INFO3180\info3180-project2\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
